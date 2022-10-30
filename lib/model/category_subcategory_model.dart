@@ -1,10 +1,8 @@
-
-List<Category> categoriesModeFromJson(List<Map<String,dynamic>> list) {
-
-  return List<Category>.from(
-        list.map((x) => Category.fromJson(x)));
+List<Category> categoriesModeFromJson(List<Map<String, dynamic>> list) {
+  return List<Category>.from(list.map((x) => Category.fromJson(x)));
 }
 
+//<<<<<Category_Model>>>>>//
 class Category {
   String categoryName;
   bool isChecked;
@@ -19,19 +17,22 @@ class Category {
   });
 
   factory Category.fromJson(Map<String, dynamic> json) {
-    List<String> subCategories = List<String>.from(json["concepts"].map((x) => x));
+    List<String> subCategories =
+        List<String>.from(json["concepts"].map((x) => x));
 
     return Category(
-        categoryName: json['topicName'],
-        subCategories: List.generate(
-          subCategories.length,
-          (index) => SubCategory(
-            name: subCategories[index],
-          ),
-        ));
+      categoryName: json['topicName'],
+      subCategories: List.generate(
+        subCategories.length,
+        (index) => SubCategory(
+          name: subCategories[index],
+        ),
+      ),
+    );
   }
 }
 
+//<<<<<Subcategory_Model>>>>>//
 class SubCategory {
   String name;
   bool isChecked;
@@ -41,7 +42,6 @@ class SubCategory {
     this.isChecked = false,
   });
 }
-
 
 List<Category> checkboxList = [
   Category(

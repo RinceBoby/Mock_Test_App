@@ -36,12 +36,11 @@ class CheckBoxWidget extends StatelessWidget {
                   categoryIndex,
                 );
               }
-
-              controller.changeCategoryCheckboxValue(
-                value!,
-                categoryIndex,
-                subCategories.length,
-              );
+              // controller.changeCategoryCheckboxValue(
+              //   value!,
+              //   categoryIndex,
+              //   subCategories.length,
+              // );
             },
           ),
           title: Text(
@@ -53,6 +52,9 @@ class CheckBoxWidget extends StatelessWidget {
               categoryIndex,
             );
           },
+          trailing: !isVisible
+              ? const Icon(Icons.keyboard_arrow_down_rounded)
+              : const Icon(Icons.keyboard_arrow_up_rounded),
         ),
         const SizedBox(
           height: 10.0,
@@ -64,7 +66,7 @@ class CheckBoxWidget extends StatelessWidget {
             index,
             controller,
           ),
-        )
+        ),
       ],
     );
   }
