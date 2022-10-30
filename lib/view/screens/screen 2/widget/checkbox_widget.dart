@@ -72,10 +72,13 @@ class CheckBoxWidget extends StatelessWidget {
   }
 
   //
-  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Method>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Method>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
   //
   Padding buildSubcategoryWidget(
-      String name, int index, CheckBoxController controller) {
+    String name,
+    int index,
+    CheckBoxController controller,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(left: 25.0),
       child: Row(
@@ -94,7 +97,7 @@ class CheckBoxWidget extends StatelessWidget {
           const SizedBox(
             width: 10.0,
           ),
-          Text(name)
+          Text(name),
         ],
       ),
     );

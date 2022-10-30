@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:mock_test/model/hive_model.dart';
 import 'package:mock_test/view/constants/spaces/dimensions.dart';
 import 'package:mock_test/view/constants/styles/colors.dart';
 import 'package:mock_test/view/screens/screen%201/widget/test_card.dart';
 import 'package:mock_test/view/screens/screen%202/screen_2.dart';
 
 class ScreenOne extends StatelessWidget {
-  const ScreenOne({super.key});
+  ScreenOne({super.key});
+
+  Box<TestNameModel> testBox = Hive.box<TestNameModel>(boxName);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +44,7 @@ class ScreenOne extends StatelessWidget {
               ),
             ),
             kHeight15,
-      
+
             //<<<<<Button>>>>>//
             ElevatedButton(
               onPressed: () {
@@ -60,18 +64,23 @@ class ScreenOne extends StatelessWidget {
               ),
             ),
             kHeight20,
-      
+
             //<<<<<Divider>>>>>//
             const Divider(
               thickness: 3,
               color: kBlue,
             ),
             // kHeight20,
-      
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Column(
                 children: [
+                  // ListView.builder(
+                  //   itemCount: ,
+                  //   itemBuilder: (context, index) {
+                  //   return TestCardWidget(size: size, title: title, on: on);
+                  // },),
                   TestCardWidget(
                     size: size,
                     title: "Physics Mock #1",
