@@ -36,6 +36,7 @@ class CheckBoxController extends GetxController {
     update();
   }
 
+  //<<<<<<Get_Test_Lists>>>>>>//
   Future<List<Category>?> getTestDetails() async {
     try {
       var data = await TestService.MockTestService();
