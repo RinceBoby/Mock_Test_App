@@ -1,4 +1,4 @@
-List<Category> categoriesModeFromJson(List<Map<String, dynamic>> list) {
+List<Category> categoriesModeFromJson(List list) {
   return List<Category>.from(list.map((x) => Category.fromJson(x)));
 }
 
@@ -43,27 +43,3 @@ class SubCategory {
   });
 }
 
-List<Category> checkboxList = [
-  Category(
-    categoryName: "Sports",
-    subCategories: [
-      SubCategory(
-        name: "Football",
-      ),
-      SubCategory(
-        name: "Cricket",
-      ),
-    ],
-  ),
-  Category(
-    categoryName: "Programming Languages",
-    subCategories: [
-      SubCategory(
-        name: "Javascript",
-      ),
-      SubCategory(
-        name: "Java",
-      ),
-    ],
-  )
-];

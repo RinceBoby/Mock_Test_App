@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:mock_test/model/category_subcategory_model.dart';
+import 'package:mock_test/service/mock_test/test_service.dart';
 
 class CheckBoxController extends GetxController {
   List<Category> list = [];
@@ -12,34 +13,43 @@ class CheckBoxController extends GetxController {
     required int categoryIndex,
     required int subIndex,
   }) {
-    checkboxList[categoryIndex].subCategories[subIndex].isChecked = value;
+    list[categoryIndex].subCategories[subIndex].isChecked = value;
 
-    int subLength = checkboxList[categoryIndex].subCategories.length;
+    int subLength = list[categoryIndex].subCategories.length;
 
-    int checkedSubLength = checkboxList[categoryIndex]
+    int checkedSubLength = list[categoryIndex]
         .subCategories
         .where((element) => element.isChecked)
         .toList()
         .length;
     if (subLength == checkedSubLength) {
-      checkboxList[categoryIndex].isChecked = true;
+      list[categoryIndex].isChecked = true;
     } else {
-      checkboxList[categoryIndex].isChecked = false;
+      list[categoryIndex].isChecked = false;
     }
     update();
   }
 
-  // void changeCategoryCheckboxValue(bool value, int categoryIndex, int length) {
-  //   for (var i = 0; i < length; i++) {
-  //     checkboxList[categoryIndex].subCategories[i].isChecked = value;
-  //   }
-  //   checkboxList[categoryIndex].isChecked = value;
-  //   update();
-  // }
-
   //<<<<<Dropdown_Function>>>>>//
   void changeVisiblity(bool value, int index) {
-    checkboxList[index].isVisible = value;
+    list[index].isVisible = value;
     update();
+  }
+
+  Future<List<Category>?> getTestDetails() async {
+    try {
+      var data = await TestService.MockTestService();
+      update();
+      return data;
+    } catch (e) {
+      print(e);
+      return [];
+    }
+  }
+
+  @override
+  void onInit() {
+    getTestDetails().then((value) => list = value!);
+    super.onInit();
   }
 }
