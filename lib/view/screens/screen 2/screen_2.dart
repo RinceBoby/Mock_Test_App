@@ -76,18 +76,15 @@ class ScreenTwo extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: checkBoxController.list.length,
                     itemBuilder: (context, index) {
-                      // final data = testController.getTestDetails[index].value;
+                      final data = checkBoxController.list[index];
                       return GetBuilder<CheckBoxController>(
                         builder: (_) {
                           return CheckBoxWidget(
-                            categoryName:
-                                checkBoxController.list[index].categoryName,
-                            subCategories:
-                                checkBoxController.list[index].subCategories,
+                            categoryName: data.categoryName,
+                            subCategories: data.subCategories,
                             categoryIndex: index,
-                            isVisible: checkBoxController.list[index].isVisible,
-                            categoryCheck:
-                                checkBoxController.list[index].isChecked,
+                            isVisible: data.isVisible,
+                            categoryCheck: data.isChecked,
                           );
                         },
                       );
