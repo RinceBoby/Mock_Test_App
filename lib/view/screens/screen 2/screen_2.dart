@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mock_test/controller/checkbox_controller.dart';
-import 'package:mock_test/controller/test_controller.dart';
-import 'package:mock_test/model/category_subcategory_model.dart';
 import 'package:mock_test/view/constants/styles/colors.dart';
 import 'package:mock_test/view/screens/screen%202/widget/checkbox_widget.dart';
 import 'package:mock_test/view/screens/screen%202/widget/text_field.dart';

@@ -1,4 +1,4 @@
-List<Category> categoriesModeFromJson(List list) {
+List<Category> categoriesModelFromJson(List list) {
   return List<Category>.from(list.map((x) => Category.fromJson(x)));
 }
 
