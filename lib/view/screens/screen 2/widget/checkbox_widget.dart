@@ -89,8 +89,8 @@ class CheckBoxWidget extends StatelessWidget {
             onChanged: (value) {
               controller.changeCheckboxValue(
                 value: value!,
-                categoryIndex: topicIndex,
-                subIndex: index,
+                topicIndex: topicIndex,
+                conceptIndex: index,
               );
             },
           ),
