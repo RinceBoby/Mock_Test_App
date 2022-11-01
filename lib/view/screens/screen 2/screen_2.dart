@@ -17,7 +17,7 @@ class ScreenTwo extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController testController = TextEditingController();
     DbController dbController = Get.put(DbController());
-    int? index;
+    
 
     CheckBoxController checkBoxController = Get.put(CheckBoxController());
     final size = MediaQuery.of(context).size;

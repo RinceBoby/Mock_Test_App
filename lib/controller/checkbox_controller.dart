@@ -10,22 +10,22 @@ class CheckBoxController extends GetxController {
     Else, only the selected suubcategory(concepts) will be checked, not the category.*/
   void changeCheckboxValue({
     required bool value,
-    required int categoryIndex,
-    required int subIndex,
+    required int topicIndex,
+    required int conceptIndex,
   }) {
-    list[categoryIndex].concepts[subIndex].isChecked = value;
+    list[topicIndex].concepts[conceptIndex].isChecked = value;
 
-    int subLength = list[categoryIndex].concepts.length;
+    int subLength = list[topicIndex].concepts.length;
 
-    int checkedSubLength = list[categoryIndex]
+    int checkedSubLength = list[topicIndex]
         .concepts
         .where((element) => element.isChecked)
         .toList()
         .length;
     if (subLength == checkedSubLength) {
-      list[categoryIndex].isChecked = true;
+      list[topicIndex].isChecked = true;
     } else {
-      list[categoryIndex].isChecked = false;
+      list[topicIndex].isChecked = false;
     }
     update();
   }
