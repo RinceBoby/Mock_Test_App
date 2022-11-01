@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:mock_test/model/category_subcategory_model.dart';
+import 'package:mock_test/model/topic_concept_model.dart';
 import 'package:mock_test/service/dio/dio_client.dart';
 
 class TestService {

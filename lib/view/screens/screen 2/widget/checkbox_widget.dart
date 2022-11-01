@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mock_test/controller/checkbox_controller.dart';
-import 'package:mock_test/model/category_subcategory_model.dart';
+import 'package:mock_test/model/topic_concept_model.dart';
 
 class CheckBoxWidget extends StatelessWidget {
   const CheckBoxWidget({

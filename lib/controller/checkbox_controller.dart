@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:mock_test/model/category_subcategory_model.dart';
+import 'package:mock_test/model/topic_concept_model.dart';
 import 'package:mock_test/service/mock_test/test_service.dart';
 
 class CheckBoxController extends GetxController {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 import 'package:mock_test/controller/db_controller.dart';
 import 'package:mock_test/model/hive_model.dart';
 import 'package:mock_test/view/constants/spaces/dimensions.dart';
