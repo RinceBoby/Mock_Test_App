@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:mock_test/controller/db_controller.dart';
 import 'package:mock_test/model/hive_model.dart';
 import 'package:mock_test/view/constants/spaces/dimensions.dart';
 import 'package:mock_test/view/constants/styles/colors.dart';
@@ -8,12 +9,11 @@ import 'package:mock_test/view/screens/screen%201/widget/test_card.dart';
 import 'package:mock_test/view/screens/screen%202/screen_2.dart';
 
 class ScreenOne extends StatelessWidget {
-  ScreenOne({super.key});
-
-  Box<TestNameModel> testBox = Hive.box<TestNameModel>(boxName);
-
+  ScreenOne({super.key, this.index});
+  int? index;
   @override
   Widget build(BuildContext context) {
+    DbController dbController = Get.put(DbController());
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: kWhite,
@@ -73,31 +73,25 @@ class ScreenOne extends StatelessWidget {
             // kHeight20,
 
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
+              padding:const EdgeInsets.symmetric(horizontal: 25),
               child: Column(
                 children: [
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: testBox.length,
-                    itemBuilder: (context, index) {
-                      TestNameModel? tests = testBox.getAt(index);
-                      return TestCardWidget(
-                        size: size,
-                        title: tests!.testName,
-                        on: tests.createdOn,
+                  Obx(
+                    () {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: dbController.testNames.length,
+                        itemBuilder: (context, index) {
+                          TestNameModel? tests = dbController.testNames[index];
+                          return TestCardWidget(
+                            size: size,
+                            title: tests.testName,
+                            on: tests.createdOn,
+                          );
+                        },
                       );
                     },
-                  ),
-                  TestCardWidget(
-                    size: size,
-                    title: "Physics Mock #1",
-                    on: "Oct 21 2022 10:19 AM",
-                  ),
-                  TestCardWidget(
-                    size: size,
-                    title: "Full Length Test",
-                    on: "Oct 19  2022 11:23 AM",
                   ),
                 ],
               ),

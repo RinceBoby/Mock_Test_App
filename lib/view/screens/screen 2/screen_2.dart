@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 import 'package:mock_test/controller/checkbox_controller.dart';
+import 'package:mock_test/controller/db_controller.dart';
 import 'package:mock_test/model/hive_model.dart';
 import 'package:mock_test/view/constants/styles/colors.dart';
 import 'package:mock_test/view/screens/screen%201/screen_1.dart';
@@ -15,7 +16,7 @@ class ScreenTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController testController = TextEditingController();
-    Box<TestNameModel> testBox = Hive.box<TestNameModel>(boxName);
+    DbController dbController = Get.put(DbController());
     int? index;
 
     CheckBoxController checkBoxController = Get.put(CheckBoxController());
@@ -52,7 +53,9 @@ class ScreenTwo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //<<<<<Test_Name>>>>>//
-                TextFieldWidget(controller: testController),
+                GetBuilder<DbController>(builder: (controller) {
+                  return TextFieldWidget(controller: testController);
+                }),
 
                 //<<<<<Topics>>>>>//
                 const Padding(
@@ -69,35 +72,37 @@ class ScreenTwo extends StatelessWidget {
                 ),
 
                 //<<<<<Check_Box>>>>>//
-                GetBuilder<CheckBoxController>(builder: (controller) {
-                  if (checkBoxController.list.isEmpty) {
-                    return const Center(
-                      child: CupertinoActivityIndicator(
-                        color: kBlue,
-                      ),
-                    );
-                  }
-
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: checkBoxController.list.length,
-                    itemBuilder: (context, index) {
-                      final data = checkBoxController.list[index];
-                      return GetBuilder<CheckBoxController>(
-                        builder: (_) {
-                          return CheckBoxWidget(
-                            categoryName: data.categoryName,
-                            subCategories: data.subCategories,
-                            categoryIndex: index,
-                            isVisible: data.isVisible,
-                            categoryCheck: data.isChecked,
-                          );
-                        },
+                GetBuilder<CheckBoxController>(
+                  builder: (controller) {
+                    if (checkBoxController.list.isEmpty) {
+                      return const Center(
+                        child: CupertinoActivityIndicator(
+                          color: kBlue,
+                        ),
                       );
-                    },
-                  );
-                },),
+                    }
+
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: checkBoxController.list.length,
+                      itemBuilder: (context, index) {
+                        final data = checkBoxController.list[index];
+                        return GetBuilder<CheckBoxController>(
+                          builder: (_) {
+                            return CheckBoxWidget(
+                              topicName: data.topicName,
+                              concepts: data.concepts,
+                              topicIndex: index,
+                              isVisible: data.isVisible,
+                              topicCheck: data.isChecked,
+                            );
+                          },
+                        );
+                      },
+                    );
+                  },
+                ),
 
                 //<<<<<Button>>>>>//
                 Center(
@@ -105,12 +110,18 @@ class ScreenTwo extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 50),
                     child: ElevatedButton(
                       onPressed: () {
+                        DateTime now = DateTime.now();
+                        String formattedDate =
+                            DateFormat("MMM dd yyyy ").format(now);
                         TestNameModel newTest = TestNameModel(
                           testName: testController.text,
-                          createdOn: DateTime.now().toString(),
+                          createdOn: formattedDate,
                         );
-                        testBox.putAt(index!, newTest);
-                        testBox.add(newTest);
+                        if (testController.text.isEmpty) {
+                          Get.snackbar("Warning ", "Field can't be empty");
+                        } else {
+                          dbController.addTestNames(newTest);
+                        }
                         Get.to(ScreenOne());
                       },
                       style: ElevatedButton.styleFrom(

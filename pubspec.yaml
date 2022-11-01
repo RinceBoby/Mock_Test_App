@@ -37,6 +37,7 @@ dependencies:
   google_fonts: ^3.0.1
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  intl: ^0.17.0
   parent_child_checkbox: ^0.0.3
 
 dev_dependencies:

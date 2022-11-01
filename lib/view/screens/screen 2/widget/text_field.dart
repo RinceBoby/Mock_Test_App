@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mock_test/controller/db_controller.dart';
 import 'package:mock_test/view/constants/spaces/dimensions.dart';
 import 'package:mock_test/view/constants/styles/colors.dart';
 
@@ -12,6 +14,7 @@ class TextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.find<DbController>();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: TextField(

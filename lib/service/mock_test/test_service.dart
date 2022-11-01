@@ -3,10 +3,10 @@ import 'package:mock_test/model/category_subcategory_model.dart';
 import 'package:mock_test/service/dio/dio_client.dart';
 
 class TestService {
-  static Future<List<Category>?> MockTestService() async {
+  static Future<List<Topic>?> MockTestService() async {
     try {
       var response = await DioClient.dio.get("/topics");
-      List<Category> data = categoriesModelFromJson(response.data);
+      List<Topic> data = categoriesModelFromJson(response.data);
       print(data);
       return data;
     } on DioError catch (e) {

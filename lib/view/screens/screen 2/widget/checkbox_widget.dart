@@ -5,18 +5,18 @@ import 'package:mock_test/model/category_subcategory_model.dart';
 
 class CheckBoxWidget extends StatelessWidget {
   const CheckBoxWidget({
-    required this.categoryCheck,
-    required this.categoryName,
-    required this.subCategories,
-    required this.categoryIndex,
+    required this.topicCheck,
+    required this.topicName,
+    required this.concepts,
+    required this.topicIndex,
     required this.isVisible,
     super.key,
   });
 
-  final bool categoryCheck;
-  final String categoryName;
-  final List<SubCategory> subCategories;
-  final int categoryIndex;
+  final bool topicCheck;
+  final String topicName;
+  final List<Concepts> concepts;
+  final int topicIndex;
   final bool isVisible;
 
   @override
@@ -28,12 +28,12 @@ class CheckBoxWidget extends StatelessWidget {
         ListTile(
           contentPadding: const EdgeInsets.all(0),
           leading: Checkbox(
-            value: categoryCheck,
+            value: topicCheck,
             onChanged: (value) {
               if (!isVisible) {
                 controller.changeVisiblity(
                   !isVisible,
-                  categoryIndex,
+                  topicIndex,
                 );
               }
               // controller.changeCategoryCheckboxValue(
@@ -44,12 +44,12 @@ class CheckBoxWidget extends StatelessWidget {
             },
           ),
           title: Text(
-            categoryName,
+            topicName,
           ),
           onTap: () {
             controller.changeVisiblity(
               !isVisible,
-              categoryIndex,
+              topicIndex,
             );
           },
           trailing: !isVisible
@@ -60,9 +60,9 @@ class CheckBoxWidget extends StatelessWidget {
           height: 10.0,
         ),
         ...List.generate(
-          isVisible ? subCategories.length : 0,
-          (index) => buildSubcategoryWidget(
-            subCategories[index].name,
+          isVisible ? concepts.length : 0,
+          (index) => buildConceptsWidget(
+            concepts[index].name,
             index,
             controller,
           ),
@@ -74,7 +74,7 @@ class CheckBoxWidget extends StatelessWidget {
   //
   //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Method>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
   //
-  Padding buildSubcategoryWidget(
+  Padding buildConceptsWidget(
     String name,
     int index,
     CheckBoxController controller,
@@ -85,11 +85,11 @@ class CheckBoxWidget extends StatelessWidget {
         children: [
           Checkbox(
             splashRadius: 0.0,
-            value: subCategories[index].isChecked,
+            value: concepts[index].isChecked,
             onChanged: (value) {
               controller.changeCheckboxValue(
                 value: value!,
-                categoryIndex: categoryIndex,
+                categoryIndex: topicIndex,
                 subIndex: index,
               );
             },

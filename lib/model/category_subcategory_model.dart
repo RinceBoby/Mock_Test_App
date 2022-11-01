@@ -1,45 +1,45 @@
-List<Category> categoriesModelFromJson(List list) {
-  return List<Category>.from(list.map((x) => Category.fromJson(x)));
-}
-
+//
 //<<<<<Category_Model>>>>>//
-class Category {
-  String categoryName;
+class Topic {
+  String topicName;
   bool isChecked;
   bool isVisible;
-  List<SubCategory> subCategories;
+  List<Concepts> concepts;
 
-  Category({
-    required this.categoryName,
-    required this.subCategories,
+  Topic({
+    required this.topicName,
+    required this.concepts,
     this.isChecked = false,
     this.isVisible = false,
   });
 
-  factory Category.fromJson(Map<String, dynamic> json) {
-    List<String> subCategories =
+  factory Topic.fromJson(Map<String, dynamic> json) {
+    List<String> allConcepts =
         List<String>.from(json["concepts"].map((x) => x));
 
-    return Category(
-      categoryName: json['topicName'],
-      subCategories: List.generate(
-        subCategories.length,
-        (index) => SubCategory(
-          name: subCategories[index],
+    return Topic(
+      topicName: json['topicName'],
+      concepts: List.generate(
+        allConcepts.length,
+        (index) => Concepts(
+          name: allConcepts[index],
         ),
       ),
     );
   }
 }
 
+List<Topic> categoriesModelFromJson(List list) {
+  return List<Topic>.from(list.map((x) => Topic.fromJson(x)));
+}
+
 //<<<<<Subcategory_Model>>>>>//
-class SubCategory {
+class Concepts {
   String name;
   bool isChecked;
 
-  SubCategory({
+  Concepts({
     required this.name,
     this.isChecked = false,
   });
 }
-

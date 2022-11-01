@@ -3,7 +3,7 @@ import 'package:mock_test/model/category_subcategory_model.dart';
 import 'package:mock_test/service/mock_test/test_service.dart';
 
 class CheckBoxController extends GetxController {
-  List<Category> list = [];
+  List<Topic> list = [];
 
   /*THis function will change the checkbox.
     The category(topic name) will be checked if the whole subcategory is checked.
@@ -13,12 +13,12 @@ class CheckBoxController extends GetxController {
     required int categoryIndex,
     required int subIndex,
   }) {
-    list[categoryIndex].subCategories[subIndex].isChecked = value;
+    list[categoryIndex].concepts[subIndex].isChecked = value;
 
-    int subLength = list[categoryIndex].subCategories.length;
+    int subLength = list[categoryIndex].concepts.length;
 
     int checkedSubLength = list[categoryIndex]
-        .subCategories
+        .concepts
         .where((element) => element.isChecked)
         .toList()
         .length;
@@ -37,7 +37,7 @@ class CheckBoxController extends GetxController {
   }
 
   //<<<<<<Get_Test_Lists>>>>>>//
-  Future<List<Category>?> getTestDetails() async {
+  Future<List<Topic>?> getTestDetails() async {
     try {
       var data = await TestService.MockTestService();
       update();

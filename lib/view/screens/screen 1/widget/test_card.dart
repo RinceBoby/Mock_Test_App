@@ -8,11 +8,13 @@ class TestCardWidget extends StatelessWidget {
     required this.size,
     required this.title,
     required this.on,
+    // required this.onLongPress,
   }) : super(key: key);
 
   final Size size;
   final String title;
   final String on;
+  // final VoidCallback onLongPress;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class TestCardWidget extends StatelessWidget {
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
-                     letterSpacing: 1,
+                    letterSpacing: 1,
                   ),
                 ),
               ),
