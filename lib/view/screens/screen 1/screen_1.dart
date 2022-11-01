@@ -76,11 +76,19 @@ class ScreenOne extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Column(
                 children: [
-                  // ListView.builder(
-                  //   itemCount: ,
-                  //   itemBuilder: (context, index) {
-                  //   return TestCardWidget(size: size, title: title, on: on);
-                  // },),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: testBox.length,
+                    itemBuilder: (context, index) {
+                      TestNameModel? tests = testBox.getAt(index);
+                      return TestCardWidget(
+                        size: size,
+                        title: tests!.testName,
+                        on: tests.createdOn,
+                      );
+                    },
+                  ),
                   TestCardWidget(
                     size: size,
                     title: "Physics Mock #1",

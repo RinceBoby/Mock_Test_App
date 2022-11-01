@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:mock_test/controller/checkbox_controller.dart';
+import 'package:mock_test/model/hive_model.dart';
 import 'package:mock_test/view/constants/styles/colors.dart';
+import 'package:mock_test/view/screens/screen%201/screen_1.dart';
 import 'package:mock_test/view/screens/screen%202/widget/checkbox_widget.dart';
 import 'package:mock_test/view/screens/screen%202/widget/text_field.dart';
 
@@ -11,6 +14,10 @@ class ScreenTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController testController = TextEditingController();
+    Box<TestNameModel> testBox = Hive.box<TestNameModel>(boxName);
+    int? index;
+
     CheckBoxController checkBoxController = Get.put(CheckBoxController());
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -45,7 +52,7 @@ class ScreenTwo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //<<<<<Test_Name>>>>>//
-                const TextFieldWidget(),
+                TextFieldWidget(controller: testController),
 
                 //<<<<<Topics>>>>>//
                 const Padding(
@@ -90,14 +97,22 @@ class ScreenTwo extends StatelessWidget {
                       );
                     },
                   );
-                }),
+                },),
 
                 //<<<<<Button>>>>>//
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 50),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        TestNameModel newTest = TestNameModel(
+                          testName: testController.text,
+                          createdOn: DateTime.now().toString(),
+                        );
+                        testBox.putAt(index!, newTest);
+                        testBox.add(newTest);
+                        Get.to(ScreenOne());
+                      },
                       style: ElevatedButton.styleFrom(
                         fixedSize: Size(size.width, 45),
                         backgroundColor: kBlue,

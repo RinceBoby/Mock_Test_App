@@ -97,7 +97,12 @@ class CheckBoxWidget extends StatelessWidget {
           const SizedBox(
             width: 10.0,
           ),
-          Text(name),
+          Flexible(
+            child: Text(
+              name,
+              style: const TextStyle(overflow: TextOverflow.ellipsis),
+            ),
+          ),
         ],
       ),
     );

@@ -5,13 +5,17 @@ import 'package:mock_test/view/constants/styles/colors.dart';
 class TextFieldWidget extends StatelessWidget {
   const TextFieldWidget({
     Key? key,
+    required this.controller,
   }) : super(key: key);
+
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: TextField(
+        controller: controller,
         style: const TextStyle(
           color: kBlack,
           fontWeight: FontWeight.bold,
